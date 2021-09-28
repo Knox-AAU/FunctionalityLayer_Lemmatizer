@@ -1,7 +1,7 @@
+import uvicorn
 from fastapi import FastAPI
 import Lemmatization as lemma
 import json
-import uvicorn
 
 app = FastAPI()
 
