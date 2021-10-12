@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 import uvicorn
 import Lemmatization as lemma
+import test
 
 # Create an instance of FastAPI
 app = FastAPI()
