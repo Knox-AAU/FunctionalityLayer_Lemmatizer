@@ -10,7 +10,8 @@ app = FastAPI()
 @app.get("/")
 # Function that returns the lemmatized text
 async def queryLemma(text:str="",language:str="da"):
-    return {"lemmatized_text": lemma.Lemmatization(text,language)}
+    try:return {"lemmatized_text": lemma.Lemmatization(text,language)}
+    except:return Exception.message
 
 # uvicorn controls which host and port the API is available at.
 if __name__=="__main__":

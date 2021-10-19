@@ -20,3 +20,4 @@ def Lemmatization(string, language):
     # Check which language to lemmatize and return the lemmatization
     if language == "da":return danishLemmatization(string)
     elif language == "en":return englishLemmatization(string)
+    else: raise Exception("Language not implemented")
