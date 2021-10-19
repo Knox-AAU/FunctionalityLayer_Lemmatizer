@@ -1,4 +1,11 @@
 import requests
-string = "The lemmatization of this string is very good! Should we make it available for everyone? Yes we should."
-lemmatized_string = requests.get(f"http://130.225.57.27/lemmatizer/", params={"text": string, "language": "en"})
+import json
+text = {
+    "string": "Hej med dig",
+    "language": "da"
+}
+
+textJson = json.dumps(text)
+lemmatized_string = requests.post(
+    f"http://130.225.57.27/lemmatizer/", Text=textJson)
 print(lemmatized_string.content.decode())
