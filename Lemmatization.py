@@ -7,16 +7,15 @@ from spacy_language_detection import LanguageDetector
 
 
 def Lemmatization(string):
-    # Same as in danishLemmatization()
     try:
-        Lemma = en_core_web_sm.load()
+        Lemma = da_core_news_sm.load()
         Language.factory("language_detector", func=get_lang_detector)
         Lemma.add_pipe("language_detector")
 
         try:
             doc = Lemma(string)
-            if doc._.language["language"] == "da":
-                Lemma = da_core_news_sm.load()
+            if doc._.language["language"] == "en":
+                Lemma = en_core_web_sm.load()
                 doc = Lemma(string)
 
             return " ".join([token.lemma_ for token in doc])
@@ -27,4 +26,4 @@ def Lemmatization(string):
 
 
 def get_lang_detector(nlp, name):
-    return LanguageDetector(seed=42)  # We use the seed 42
+    return LanguageDetector(seed=42)
