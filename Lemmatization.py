@@ -1,29 +1,30 @@
 # Imported from spacy.io
-import en_core_web_sm
 import da_core_news_sm
+import en_core_web_sm
+import spacy
+from spacy.language import Language
+from spacy_language_detection import LanguageDetector
 
 
-def danishLemmatization(string):
-    # Load the core module
-    danLemma = da_core_news_sm.load()
-    # Parse the string
-    doc = danLemma(string)
-    # Extract the lemma for each token and join the lemma with a space between every word. Then return it
-    return " ".join([token.lemma_ for token in doc])
-
-
-def englishLemmatization(string):
+def Lemmatization(string):
     # Same as in danishLemmatization()
-    engLemma = en_core_web_sm.load()
-    doc = engLemma(string)
-    return " ".join([token.lemma_ for token in doc])
+    try:
+        Lemma = en_core_web_sm.load()
+        Language.factory("language_detector", func=get_lang_detector)
+        Lemma.add_pipe("language_detector")
+
+        try:
+            doc = Lemma(string)
+            if doc._.language["language"] == "da":
+                Lemma = da_core_news_sm.load()
+                doc = Lemma(string)
+
+            return " ".join([token.lemma_ for token in doc])
+        except Exception as e:
+            return str(e)
+    except Exception as e:
+        return str(e)
 
 
-def Lemmatization(string, language):
-    # Check which language to lemmatize and return the lemmatization
-    if language == "da":
-        return danishLemmatization(string)
-    elif language == "en":
-        return englishLemmatization(string)
-    else:
-        raise Exception("ERROR: Language not implemented")
+def get_lang_detector(nlp, name):
+    return LanguageDetector(seed=42)  # We use the seed 42
