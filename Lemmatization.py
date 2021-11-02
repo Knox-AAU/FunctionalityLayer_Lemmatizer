@@ -7,10 +7,9 @@ from spacy_language_detection import LanguageDetector
 
 
 def Lemmatization(string, language):
-    
         if language == "da":
             Lemma = da_core_news_sm.load()
-            doc = Lemma(string)
+            doc = Lemma(string.lower())
             return " ".join([token.lemma_ for token in doc])
 
         elif language == "en":
@@ -26,7 +25,7 @@ def Lemmatization(string, language):
                 Lemma.add_pipe("language_detector")
 
                 try:
-                    doc = Lemma(string)
+                    doc = Lemma(string.lower())
                     if doc._.language["language"] == "en":
                         Lemma = en_core_web_sm.load()
                         doc = Lemma(string)
