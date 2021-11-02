@@ -40,4 +40,4 @@ def Lemmatization(string, language):
                 return str(e)
 
 def get_lang_detector(nlp, name):
-    return LanguageDetector(seed=42)
+    return LanguageDetector()
