@@ -5,7 +5,9 @@ import Lemmatization as lemma
 class wordcountTest(unittest.TestCase):
 
     def testDanishLemmatizatizer(self):
-        string = "hahahahahahahahha jeg er så sjov :D"
+        f = open("testcases/testcase_da.txt", encoding='utf-8')
+        string = f.read()
+        f.close()
         answer = " ".join(word for word in string if word.isalnum())
         testcase = lemma.Lemmatization(answer,"da")
         answer = answer.split(" ")
@@ -14,7 +16,9 @@ class wordcountTest(unittest.TestCase):
         self.assertEqual(len(testcase), len(answer))
 
     def testEnglishLemmatizer(self):
-        string = "hahahahhahahahah im so funny :D"
+        f = open("testcases/testcase_en.txt", encoding='utf-8')
+        string = f.read()
+        f.close()
         answer = " ".join(word for word in string if word.isalnum())
         testcase = lemma.Lemmatization(answer,"en")
         answer = answer.split(" ")
