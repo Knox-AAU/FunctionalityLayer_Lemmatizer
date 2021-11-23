@@ -26,7 +26,7 @@ def Lemmatization(string, language):
 
                 try:
                     doc = Lemma(string.lower())
-                    if doc.language["language"] == "en":
+                    if doc._.language["language"] == "en":
                         Lemma = en_core_web_sm.load()
                         doc = Lemma(string)
 
