@@ -23,12 +23,13 @@ def Lemmatization(string, language):
                 Lemma = da_core_news_sm.load()
                 Language.factory("language_detector", func=get_lang_detector)
                 Lemma.add_pipe("language_detector")
-
+                dected_language = "da"
                 try:
                     doc = Lemma(string.lower())
                     if doc._.language["language"] == "en":
                         Lemma = en_core_web_sm.load()
                         doc = Lemma(string)
+                        dected_language = "en"
 
                     return " ".join([token.lemma_ for token in doc])
 

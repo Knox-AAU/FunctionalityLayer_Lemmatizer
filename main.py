@@ -18,6 +18,10 @@ app = FastAPI()
 async def queryLemma(text: Text):
     return {"lemmatized_string": lemma.Lemmatization(text.string, text.language)}
 
+@app.post("/GetLanguage")
+async def getLanguage(text: Text):
+    return {"language": lemma.get_lang_detector(nlp, name)}
+
 # uvicorn controls which host and port the API is available at.
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=5000)
