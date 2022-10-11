@@ -20,7 +20,7 @@ async def queryLemma(text: Text):
 
 @app.post("/GetLanguage")
 async def getLanguage(text: Text):
-    return {"language": lemma.get_lang_detector(nlp, name)}
+    return {"lemmatized_language": lemma.get_language(text.string)}
 
 # uvicorn controls which host and port the API is available at.
 if __name__ == "__main__":
