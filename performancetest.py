@@ -1,4 +1,4 @@
-import unittest
+"""import unittest
 import requests
 import threading
 import time
@@ -44,7 +44,7 @@ class testPerformance(unittest.TestCase):
         lemmatized_string = requests.post(
             f"http://127.0.0.1:5000/", data=textJson)
 
-        print("Language not given, danish text:", 
+        print("Language not given, danish text:",
                 time.time()-start)
         self.assertEqual(lemmatized_string.status_code, 200)
 
@@ -64,3 +64,4 @@ class testPerformance(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+"""

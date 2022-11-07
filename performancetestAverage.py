@@ -1,4 +1,4 @@
-import requests
+"""import requests
 import threading
 import time
 import json
@@ -71,4 +71,4 @@ avg4 = avg4/100;
 print("testDanishWithLangParam " + avg1)
 print("testEnglishWithLangParam" + avg2)
 print("testDanishNoLangParam" + avg3)
-print("testEnglishNoLangParam" + avg4)
+print("testEnglishNoLangParam" + avg4)"""
