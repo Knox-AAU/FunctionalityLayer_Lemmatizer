@@ -1,5 +1,5 @@
 import unittest
-import Lemmatization as lemma
+import lemmatization as lemma
 
 
 class wordcountTest(unittest.TestCase):
@@ -9,7 +9,7 @@ class wordcountTest(unittest.TestCase):
         string = f.read()
         f.close()
         answer = " ".join(word for word in string if word.isalnum())
-        testcase = lemma.Lemmatization(answer,"da")
+        testcase = lemma.lemmatization(answer,"da")
         answer = answer.split(" ")
         testcase = testcase.split(" ")
         #print(len(testcase), len(answer))
@@ -20,7 +20,7 @@ class wordcountTest(unittest.TestCase):
         string = f.read()
         f.close()
         answer = " ".join(word for word in string if word.isalnum())
-        testcase = lemma.Lemmatization(answer,"en")
+        testcase = lemma.lemmatization(answer,"en")
         answer = answer.split(" ")
         testcase = testcase.split(" ")
         # print(len(testcase),len(answer))

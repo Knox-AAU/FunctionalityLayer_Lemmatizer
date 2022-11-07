@@ -1,8 +1,8 @@
-from fastapi import FastAPI
-import uvicorn
-import Lemmatization as lemma
-from pydantic import BaseModel
 from typing import Optional
+from pydantic import BaseModel
+import uvicorn
+from fastapi import FastAPI
+import lemmatization as lemma
 
 # The parameter text that is going to be lemmatized is contained within a body
 
@@ -15,11 +15,11 @@ app = FastAPI()
 
 @app.post("/")
 # Function that returns the lemmatized text
-async def queryLemma(text: Text):
-    return {"lemmatized_string": lemma.Lemmatization(text.string, text.language)}
+async def query_lemma(text: Text):
+    return {"lemmatized_string": lemma.lemmatization(text.string, text.language)}
 
 @app.post("/GetLanguage")
-async def getLanguage(text: Text):
+async def get_language(text: Text):
     return {"lemmatized_language": lemma.get_language(text.string)}
 
 # uvicorn controls which host and port the API is available at.
