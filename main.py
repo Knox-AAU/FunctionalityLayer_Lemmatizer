@@ -13,12 +13,12 @@ class Text(BaseModel):
 # Create an instance of FastAPI
 app = FastAPI()
 
-@app.post("/")
 # Function that returns the lemmatized text
-
+@app.post("/")
 async def query_lemma(text: Text):
-    return {"lemmatized_string": lemma.lemmatization(text.string, text.language)}
+    return lemma.lemmatization(text.string, text.language)
 
+# Function that returns the language of the text
 @app.post("/GetLanguage")
 async def get_language(text: Text):
     return {"lemmatized_language": lemma.get_language(text.string)}

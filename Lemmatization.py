@@ -11,16 +11,14 @@ def lemmatization(string, language):
     if language == "en":
         return get_trimmed_words(get_tokens(string), "en")
 
-    try:
-        temp_language = da_core_news_sm.load()
-        Language.factory("language_detector", func=get_lang_detector)
-        temp_language.add_pipe("language_detector")
-        doc = temp_language(string)
-        input_language = doc._.language["language"]
-        if input_language in ('en', 'da'):
-            return get_trimmed_words(get_tokens(string), input_language)
-    except Exception as e:
-        return str(e)
+    temp_language = da_core_news_sm.load()
+    Language.factory("language_detector", func=get_lang_detector)
+    temp_language.add_pipe("language_detector")
+    doc = temp_language(string)
+    input_language = doc._.language["language"]
+    if input_language in ('en', 'da'):
+        return get_trimmed_words(get_tokens(string), input_language)
+    return "Text is not of a supported language"
 
 def get_trimmed_words(words, language):
     if language == "da":
@@ -47,22 +45,17 @@ def get_token_re_pattern():
     return re.compile(r'[0-9]+,[0-9]+|[a-z0-9æøå]{2,}|[0-9]+')
 
 def get_language(string):
-    try:
-        lemma = da_core_news_sm.load()
-        Language.factory("language_detector", func=get_lang_detector)
-        lemma.add_pipe("language_detector")
-        dected_language = "da"
-        try:
-            doc = lemma(string.lower())
-            if doc._.language["language"] == "en":
-                lemma = en_core_web_sm.load()
-                doc = lemma(string)
-                dected_language = "en"
-                return dected_language
-        except Exception as e:
-            return str(e)
-    except Exception as e:
-        return str(e)
+    lemma = da_core_news_sm.load()
+    Language.factory("language_detector", func=get_lang_detector)
+    lemma.add_pipe("language_detector")
+    dected_language = "da"
+    doc = lemma(string.lower())
+    if doc._.language["language"] == "en":
+        lemma = en_core_web_sm.load()
+        doc = lemma(string)
+        dected_language = "en"
+        return dected_language
+    return "Language is not supported"
 
 def get_lang_detector(nlp, name):
     return LanguageDetector()

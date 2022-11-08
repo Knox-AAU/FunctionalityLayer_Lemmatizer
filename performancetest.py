@@ -1,61 +1,60 @@
 """import unittest
-import requests
-import threading
-import time
 import json
+import time
+import requests
 
 
-class testPerformance(unittest.TestCase):
+class TestPerformance(unittest.TestCase):
 
-    def testDanishWithLangParam(self):
+    def test_danish_with_lang_param(self):
         start = time.time()
         text = {
             "string": "Hej, mit navn er Peter. Jeg elsker biler og film.",
             "language": "da"
         }
-        textJson = json.dumps(text)
+        text_json = json.dumps(text)
         lemmatized_string = requests.post(
-            f"http://127.0.0.1:5000/", data=textJson)
+            "http://127.0.0.1:5000/", data=text_json, timeout=10)
 
         print("Language given, danish text:",
               time.time()-start)
         self.assertEqual(lemmatized_string.status_code, 200)
 
-    def testEnglishWithLangParam(self):
+    def test_english_with_lang_param(self):
         start = time.time()
         text = {
             "string": "Hello, my name is Peter. I love cars and movies.",
             "language": "en"
         }
-        textJson = json.dumps(text)
+        text_json = json.dumps(text)
         lemmatized_string = requests.post(
-            f"http://127.0.0.1:5000/", data=textJson)
+            "http://127.0.0.1:5000/", data=text_json, timeout=10)
 
         print("Language given, english text:",
               time.time()-start)
         self.assertEqual(lemmatized_string.status_code, 200)
 
-    def testDanishNoLangParam(self):
+    def test_danish_no_lang_param(self):
         start = time.time()
         text = {
             "string": "Hej, mit navn er Peter. Jeg elsker biler og film.",
         }
-        textJson = json.dumps(text)
+        text_json = json.dumps(text)
         lemmatized_string = requests.post(
-            f"http://127.0.0.1:5000/", data=textJson)
+            "http://127.0.0.1:5000/", data=text_json, timeout=10)
 
         print("Language not given, danish text:",
                 time.time()-start)
         self.assertEqual(lemmatized_string.status_code, 200)
 
-    def testEnglishNoLangParam(self):
+    def test_english_no_lang_param(self):
         start = time.time()
         text = {
             "string": "Hello, my name is Peter. I love cars and movies."
         }
-        textJson = json.dumps(text)
+        text_json = json.dumps(text)
         lemmatized_string = requests.post(
-            f"http://127.0.0.1:5000/", data=textJson)
+            "http://127.0.0.1:5000/", data=text_json, timeout=10)
 
         print("Language not given, english text:",
               time.time()-start)
