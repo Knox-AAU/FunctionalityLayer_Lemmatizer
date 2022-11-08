@@ -2,7 +2,7 @@ from typing import Optional
 from pydantic import BaseModel
 import uvicorn
 from fastapi import FastAPI
-import lemmatization as lemma
+import token_maker
 
 
 # The parameter text that is going to be lemmatized is contained within a body
@@ -16,12 +16,12 @@ app = FastAPI()
 # Function that returns the lemmatized text
 @app.post("/")
 async def query_lemma(text: Text):
-    return lemma.lemmatization(text.string, text.language)
+    return token_maker.lemmatization(text.string, text.language)
 
 # Function that returns the language of the text
 @app.post("/GetLanguage")
 async def get_language(text: Text):
-    return {"lemmatized_language": lemma.get_language(text.string)}
+    return {"lemmatized_language": token_maker.get_language(text.string)}
 
 # uvicorn controls which host and port the API is available at.
 if __name__ == "__main__":
