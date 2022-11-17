@@ -38,17 +38,13 @@ def get_token_re_pattern():
 
 def get_language(input_str):
     lemma = da_core_news_sm.load()
-    dected_language = "da"
     Language.factory("language_detector", func=get_lang_detector)
     lemma.add_pipe("language_detector")
     doc = lemma(input_str.lower())
-    if doc._.language["language"] == "en":
-        lemma = en_core_web_sm.load()
-        doc = lemma(input_str)
-        dected_language = "en"
-        return dected_language
+    if doc._.language["language"] is not None:
+        return doc._.language["language"]
     else:
-        return "Language is not supported"
+        return "Can not recognise language "
 
 def get_lang_detector(nlp, name):
     return LanguageDetector()
