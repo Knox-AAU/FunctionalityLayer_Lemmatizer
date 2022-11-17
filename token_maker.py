@@ -16,22 +16,22 @@ def lemmatization(input_str, language):
     else:
         return "Text is not of a supported language"
 
-def get_trimmed_words(words, nlp):
-    words_str = ' '.join(words)
-    doc = nlp(words_str)
-    word_lemmas = []
+def get_trimmed_words(tokens, nlp):
+    tokens_str = ' '.join(tokens)
+    doc = nlp(tokens_str)
+    tokens_lemmas = []
     for token in doc:
         if not token.is_stop:
-            word_lemmas.append(token.lemma_)
-    return word_lemmas
+            tokens_lemmas.append(token.lemma_)
+    return tokens_lemmas
 
 def get_tokens(text):
     text = text.lower()
     accepted_tokens_pattern = get_token_re_pattern()
-    words = []
+    tokens = []
     for match in accepted_tokens_pattern.finditer(text):
-        words.append(match.group())
-    return words
+        tokens.append(match.group())
+    return tokens
 
 def get_token_re_pattern():
     return re.compile(r'[0-9]+,[0-9]+|[a-z0-9æøå]{2,}|[0-9]+')
