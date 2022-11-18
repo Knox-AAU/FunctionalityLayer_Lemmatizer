@@ -13,7 +13,7 @@ class TestClient(unittest.TestCase):
         print(lemmatized_string.status_code)
         self.assertEqual(lemmatized_string.status_code, 200)
 
-    def test_lenght(self):
+    def test_length(self):
         text = {
             "string": "Hej med dig",
         }
