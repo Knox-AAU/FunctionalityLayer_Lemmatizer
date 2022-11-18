@@ -9,16 +9,16 @@ def lemmatization(input_str, language):
         language = get_language(input_str)
     if language == "da":
         nlp = da_core_news_sm.load()
-        return get_trimmed_words(get_tokens(input_str), nlp)
+        return get_trimmed_tokens(get_tokens(input_str), nlp)
     elif language == "en":
         nlp = en_core_web_sm.load()
-        return get_trimmed_words(get_tokens(input_str), nlp)
+        return get_trimmed_tokens(get_tokens(input_str), nlp)
     else:
         return "Text is not of a supported language"
 
-def get_trimmed_words(tokens, nlp):
-    tokens_str = ' '.join(tokens)
-    doc = nlp(tokens_str)
+def get_trimmed_tokens(words, nlp):
+    words_str = ' '.join(words)
+    doc = nlp(words_str)
     tokens_lemmas = []
     for token in doc:
         if not token.is_stop:
